@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sharanya Sivasathiyanathan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #0a1628;
+      --navy-mid: #0f2040;
+      --navy-light: #1a3258;
+      --white: #f5f5f0;
+      --off-white: #e8e4dc;
+      --accent: #4a9eff;
+      --accent-dim: #2a5a99;
+      --muted: #7a8fa6;
+      --border: rgba(74, 158, 255, 0.15);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--navy);
+      color: var(--white);
+      font-family: 'DM Mono', monospace;
+      font-weight: 300;
+      overflow-x: hidden;
+      cursor: default;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.4rem 3rem;
+      background: rgba(10, 22, 40, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+      text-decoration: none;
+    }
+
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--white); }
+    .nav-links a.active { color: var(--accent); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 8rem 3rem 4rem;
+      gap: 4rem;
+      position: relative;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(26, 50, 88, 0.5) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .hero-text { position: relative; z-index: 2; }
+
+    .hero-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: 0.8rem;
+    }
+    .hero-label::before {
+      content: '';
+      display: block;
+      width: 2rem; height: 1px;
+      background: var(--accent);
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 5vw, 5.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+    }
+
+    h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-desc {
+      font-size: 0.82rem;
+      line-height: 1.8;
+      color: var(--muted);
+      max-width: 440px;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-tags {
+      display: flex; flex-wrap: wrap; gap: 0.6rem;
+      margin-bottom: 2.5rem;
+    }
+    .tag {
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.4rem 0.9rem;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      border-radius: 2px;
+    }
+
+    .hero-cta {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+    }
+
+    .btn {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 0.85rem 1.8rem;
+      border-radius: 2px;
+      transition: all 0.2s;
+      display: inline-block;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--navy);
+      font-weight: 500;
+    }
+    .btn-primary:hover { background: #6ab3ff; }
+
+    .btn-outline {
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--white); }
+
+    /* HERO IMAGES */
+    .hero-images {
+      position: relative; z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 1rem;
+    }
+
+    .hero-img-main {
+      grid-column: 1 / 3;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+    }
+
+    .hero-img-side {
+      aspect-ratio: 3/4;
+      overflow: hidden;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+    }
+
+    .hero-img-main img, .hero-img-side img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(20%);
+      transition: filter 0.4s;
+    }
+    .hero-img-main:hover img, .hero-img-side:hover img { filter: grayscale(0%); }
+
+    .img-caption {
+      font-size: 0.6rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-align: center;
+      margin-top: 0.4rem;
+      text-transform: uppercase;
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 6rem 3rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.8rem;
+      display: flex; align-items: center; gap: 0.8rem;
+    }
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 1.5rem; height: 1px;
+      background: var(--accent);
+    }
+
+    h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 300;
+      margin-bottom: 2.5rem;
+      color: var(--white);
+    }
+
+    /* ABOUT GRID */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .about-text p {
+      font-size: 0.82rem;
+      line-height: 1.9;
+      color: var(--muted);
+      margin-bottom: 1.2rem;
+    }
+
+    /* CARDS */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .card {
+      background: var(--navy-mid);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.8rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .card:hover { border-color: var(--accent-dim); transform: translateY(-2px); }
+
+    .card-icon {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+    }
+    .card h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--white);
+    }
+    .card p {
+      font-size: 0.75rem;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    /* HOBBIES */
+    .hobbies-section { padding-top: 0; }
+    .hobbies-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .hobbies-list {
+      display: flex; flex-direction: column; gap: 1rem;
+    }
+
+    .hobby-item {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 1rem 1.2rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: var(--navy-mid);
+    }
+
+    .hobby-emoji { font-size: 1.3rem; }
+
+    .hobby-text h4 {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 0.15rem;
+    }
+    .hobby-text p {
+      font-size: 0.7rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .hobbies-image {
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .hobbies-image img {
+      width: 100%; display: block;
+      object-fit: cover;
+      aspect-ratio: 4/5;
+      filter: grayscale(15%);
+    }
+    .hobbies-image:hover img { filter: grayscale(0%); transition: filter 0.4s; }
+
+    /* EXPERIENCE CARDS */
+    .exp-items { display: flex; flex-direction: column; gap: 0; }
+    .exp-item {
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1.5rem;
+      align-items: start;
+    }
+    .exp-dot {
+      width: 8px; height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      margin-top: 0.35rem;
+    }
+    .exp-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 0.2rem;
+    }
+    .exp-org {
+      font-size: 0.72rem;
+      color: var(--accent);
+      margin-bottom: 0.3rem;
+    }
+    .exp-date {
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 100%;
+    }
+    footer p { font-size: 0.7rem; color: var(--muted); }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a {
+      font-size: 0.7rem;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--accent); }
+
+    /* DIVIDER */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0 3rem;
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .hero-text { animation: fadeUp 0.7s ease both; }
+    .hero-images { animation: fadeUp 0.7s ease 0.15s both; }
+
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { gap: 1.2rem; }
+      .hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 3rem; gap: 2.5rem; }
+      .hero-images { grid-template-columns: 1fr; }
+      .hero-img-main { grid-column: 1; }
+      section { padding: 4rem 1.5rem; }
+      .about-grid, .hobbies-grid { grid-template-columns: 1fr; gap: 2rem; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
+      .divider { margin: 0 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="index.html">SS</a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">About</a></li>
+      <li><a href="writing.html">Writing</a></li>
+      <li><a href="competitions.html">Competitions</a></li>
+      <li><a href="https://www.linkedin.com/in/sharanya-sivas/" target="_blank">LinkedIn ↗</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-text">
+      <p class="hero-label">Commerce · Queen's University</p>
+      <h1>Sharanya<br /><em>Sivasathiyanathan</em></h1>
+      <p class="hero-desc">
+        Business student, published writer, and student leader passionate about finance, policy, and the social impact of markets. Currently researching gender bias in flexible work at Smith School of Business.
+      </p>
+      <div class="hero-tags">
+        <span class="tag">Finance</span>
+        <span class="tag">Policy</span>
+        <span class="tag">Research</span>
+        <span class="tag">Social Impact</span>
+        <span class="tag">ESG</span>
+      </div>
+      <div class="hero-cta">
+        <a href="writing.html" class="btn btn-primary">Read My Work</a>
+        <a href="mailto:sharanya.s@queensu.ca" class="btn btn-outline">Get In Touch</a>
+      </div>
+    </div>
+    <div class="hero-images">
+      <div class="hero-img-main">
+        <img src="speaking.png" alt="Sharanya speaking at The Westin Ottawa" />
+      </div>
+      <div class="hero-img-side">
+        <img src="headshot.png" alt="Sharanya Sivasathiyanathan" />
+      </div>
+      <div class="hero-img-side">
+        <img src="dog.png" alt="Sharanya with her dog" />
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- ABOUT -->
+  <section>
+    <p class="section-label">Background</p>
+    <h2>About Me</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          I'm a first-year Commerce student at Smith School of Business, Queen's University, and one of 50 recipients of the Chancellor's Scholarship. My work spans finance, governance, and social policy — I believe markets work better when they work for everyone.
+        </p>
+        <p>
+          As CEO of the Ontario Student Trustees' Association, I help shape education policy and lead province-wide conferences. As an Investment Analyst with Queen's Sustainable Business Initiative, I apply an ESG lens to research that matters.
+        </p>
+        <p>
+          I've spoken on CBC News Radio, published in the Queen's Business Review, organized rallies on Parliament Hill, and was selected for the City of Ottawa's firefighter training program. I care deeply about access — to opportunities, information, and community.
+        </p>
+      </div>
+      <div class="cards-grid" style="grid-template-columns:1fr;">
+        <div class="card">
+          <div class="card-icon">🎓</div>
+          <h3>Chancellor's Scholar</h3>
+          <p>1 of 50 students selected for the $48,000 Chancellor's Scholarship at Queen's University.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🔬</div>
+          <h3>Research Fellow</h3>
+          <p>Investigating gender and racial bias in freelancing and flexible work at Smith School of Business.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">📢</div>
+          <h3>Student Leader</h3>
+          <p>CEO of the Ontario Student Trustees' Association, representing students across Ontario.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- HOBBIES -->
+  <section class="hobbies-section">
+    <p class="section-label">Life Outside Work</p>
+    <h2>Hobbies & Interests</h2>
+    <div class="hobbies-grid">
+      <div class="hobbies-list">
+        <div class="hobby-item">
+          <span class="hobby-emoji">🐕</span>
+          <div class="hobby-text">
+            <h4>Hiking with my dog</h4>
+            <p>Exploring trails with my favourite adventure companion.</p>
+          </div>
+        </div>
+        <div class="hobby-item">
+          <span class="hobby-emoji">🧶</span>
+          <div class="hobby-text">
+            <h4>Crocheting</h4>
+            <p>Slow craft, fast results — the perfect antidote to a busy schedule.</p>
+          </div>
+        </div>
+        <div class="hobby-item">
+          <span class="hobby-emoji">🎬</span>
+          <div class="hobby-text">
+            <h4>Movies with my sister</h4>
+            <p>Our ritual — any genre, any time, always together.</p>
+          </div>
+        </div>
+        <div class="hobby-item">
+          <span class="hobby-emoji">📖</span>
+          <div class="hobby-text">
+            <h4>Historical fiction</h4>
+            <p>Currently reading: <em>Blacktop Wasteland</em> by S. A. Cosby.</p>
+          </div>
+        </div>
+        <div class="hobby-item">
+          <span class="hobby-emoji">✍️</span>
+          <div class="hobby-text">
+            <h4>Writing articles</h4>
+            <p>On markets, policy, and the issues that matter to me.</p>
+          </div>
+        </div>
+        <div class="hobby-item">
+          <span class="hobby-emoji">🏀</span>
+          <div class="hobby-text">
+            <h4>Basketball</h4>
+            <p>Playing pickup whenever the gym is open.</p>
+          </div>
+        </div>
+        <div class="hobby-item">
+          <span class="hobby-emoji">🎵</span>
+          <div class="hobby-text">
+            <h4>Tamil music</h4>
+            <p>Listening to Tamil songs — a connection to culture and home.</p>
+          </div>
+        </div>
+      </div>
+      <div class="hobbies-image">
+        <img src="dog.png" alt="Sharanya with her dog in a tulip garden" />
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- KEY EXPERIENCES -->
+  <section>
+    <p class="section-label">Leadership & Service</p>
+    <h2>Key Experiences</h2>
+    <div class="exp-items">
+      <div class="exp-item">
+        <div class="exp-dot"></div>
+        <div>
+          <p class="exp-title">CEO — Ontario Student Trustees' Association (OSTA-AECO)</p>
+          <p class="exp-org">Toronto, ON</p>
+          <p class="exp-date">May 2025 – Present</p>
+        </div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-dot"></div>
+        <div>
+          <p class="exp-title">Undergraduate Summer Research Fellow — Smith School of Business</p>
+          <p class="exp-org">Queen's University, Kingston, ON</p>
+          <p class="exp-date">April 2026 – Present</p>
+        </div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-dot"></div>
+        <div>
+          <p class="exp-title">City of Ottawa Firefighter Training Program</p>
+          <p class="exp-org">Ottawa, ON · 1 of 20 students selected</p>
+          <p class="exp-date">Crisis response & physical endurance via live emergency simulations</p>
+        </div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-dot"></div>
+        <div>
+          <p class="exp-title">Student Trustee — Ottawa Carleton District School Board</p>
+          <p class="exp-org">Ottawa, ON · Spoke on CBC News Radio</p>
+          <p class="exp-date">May 2024 – May 2025</p>
+        </div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-dot"></div>
+        <div>
+          <p class="exp-title">Investment Analyst — Queen's Sustainable Business Initiative</p>
+          <p class="exp-org">Kingston, ON · ESG-focused research</p>
+          <p class="exp-date">March 2026 – Present</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Sharanya Sivasathiyanathan</p>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/sharanya-sivas/" target="_blank">LinkedIn</a>
+      <a href="https://medium.com/@sharanyasivasathiyanathan1" target="_blank">Medium</a>
+      <a href="mailto:sharanya.s@queensu.ca">Email</a>
+    </div>
+  </footer>
+
+</body>
+</html>
