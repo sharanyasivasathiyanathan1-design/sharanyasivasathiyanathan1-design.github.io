@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Writing — Sharanya Sivasathiyanathan</title>
+  <style>
+    :root {
+      --cream: #faf6f0; --cream-dark: #f0e9dc; --cream-border: #e0d5c4;
+      --amber: #b5651d; --amber-light: #d4843a; --amber-dim: #8c4d16;
+      --brown: #3d2b1f; --brown-mid: #5c3d2a; --muted: #7a6552; --white: #fffdf9;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: var(--cream); color: var(--brown); font-family: 'Times New Roman', Times, serif; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 3rem;
+      background: rgba(250,246,240,0.93); backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--cream-border);
+    }
+    .nav-name { font-size: 1rem; color: var(--brown); text-decoration: none; letter-spacing: 0.03em; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.88rem; font-style: italic; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--amber); }
+
+    .page-header { padding: 9rem 3rem 4rem; border-bottom: 1px solid var(--cream-border); }
+    .section-label { font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--amber); margin-bottom: 0.7rem; font-style: italic; }
+    h1 { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: normal; line-height: 1.1; margin-bottom: 1rem; }
+    .page-desc { font-size: 1rem; line-height: 1.8; color: var(--brown-mid); max-width: 620px; }
+
+    main { max-width: 860px; margin: 0 auto; padding: 5rem 3rem 7rem; }
+
+    /* ARTICLE */
+    .article-block { margin-bottom: 6rem; padding-bottom: 6rem; border-bottom: 1px solid var(--cream-border); }
+    .article-block:last-child { border-bottom: none; }
+
+    .article-meta-row { display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap; margin-bottom: 1.3rem; }
+    .article-pub { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--amber); background: rgba(181,101,29,0.08); padding: 0.3rem 0.75rem; border-radius: 1px; font-style: normal; }
+    .article-date { font-size: 0.78rem; color: var(--muted); font-style: italic; }
+
+    .article-block h2 { font-size: clamp(1.6rem, 3.5vw, 2.5rem); font-weight: normal; line-height: 1.2; margin-bottom: 0.4rem; }
+    .article-byline { font-size: 0.85rem; color: var(--muted); font-style: italic; margin-bottom: 1.8rem; }
+
+    /* PDF EMBED */
+    .pdf-scan { width: 100%; border: 1px solid var(--cream-border); border-radius: 2px; overflow: hidden; margin: 1.8rem 0; background: var(--cream-dark); }
+    .pdf-scan embed { width: 100%; height: 680px; display: block; border: none; }
+    .pdf-caption { padding: 0.75rem 1rem; font-size: 0.72rem; color: var(--muted); font-style: italic; border-top: 1px solid var(--cream-border); display: flex; justify-content: space-between; align-items: center; }
+    .pdf-caption a { color: var(--amber); text-decoration: none; }
+
+    /* ARTICLE BODY */
+    .article-body { margin-top: 2.2rem; }
+    .article-body p { font-size: 1.05rem; line-height: 1.8; color: var(--brown-mid); margin-bottom: 1.3rem; }
+    .article-body h3 { font-size: 0.95rem; font-weight: bold; color: var(--amber); margin: 2.2rem 0 0.7rem; font-style: italic; }
+    .article-body .lede { font-size: 1.18rem; color: var(--brown); margin-bottom: 1.6rem; line-height: 1.7; }
+
+    /* MEDIUM CARDS */
+    .medium-cards { display: flex; flex-direction: column; gap: 1rem; }
+    .medium-card {
+      background: var(--white); border: 1px solid var(--cream-border); border-radius: 2px;
+      padding: 1.8rem 2rem; text-decoration: none;
+      display: flex; gap: 1.5rem; align-items: flex-start;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .medium-card:hover { border-color: var(--amber); box-shadow: 0 2px 12px rgba(181,101,29,0.07); }
+    .medium-icon { font-size: 1.8rem; flex-shrink: 0; }
+    .medium-card h3 { font-size: 1.15rem; font-weight: normal; color: var(--brown); margin-bottom: 0.4rem; line-height: 1.3; }
+    .medium-card p { font-size: 0.88rem; line-height: 1.65; color: var(--muted); font-style: italic; margin-bottom: 0.6rem; }
+    .medium-link { font-size: 0.82rem; color: var(--amber); font-style: italic; }
+
+    footer { border-top: 1px solid var(--cream-border); padding: 2.5rem 3rem; display: flex; justify-content: space-between; align-items: center; background: var(--cream-dark); }
+    footer p { font-size: 0.82rem; color: var(--muted); font-style: italic; }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { font-size: 0.82rem; color: var(--muted); text-decoration: none; font-style: italic; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--amber); }
+
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; } .nav-links { gap: 1.2rem; }
+      .page-header { padding: 7rem 1.5rem 3rem; }
+      main { padding: 3rem 1.5rem; }
+      .pdf-scan embed { height: 380px; }
+      .medium-card { flex-direction: column; gap: 0.8rem; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-name" href="index.html">Sharanya Sivasathiyanathan</a>
+    <ul class="nav-links">
+      <li><a href="index.html">About</a></li>
+      <li><a href="writing.html" class="active">Writing</a></li>
+      <li><a href="competitions.html">Competitions</a></li>
+      <li><a href="https://www.linkedin.com/in/sharanya-sivas/" target="_blank">LinkedIn ↗</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-header">
+    <p class="section-label">Published Work</p>
+    <h1>Writing</h1>
+    <p class="page-desc">In an age of AI-generated content, writing is a skill I am passionate about and continue to build deliberately. Below are two pieces from my first year on the Queen's Business Review, published in the Spring 2026 print edition, along with linked essays from my personal Medium blog. I write on markets, policy, mental health, and whatever else earns a strong opinion.</p>
+  </div>
+
+  <main>
+
+    <!-- ARTICLE 1 -->
+    <div class="article-block" id="earnings">
+      <div class="article-meta-row">
+        <span class="article-pub">Queen's Business Review · Vol. 16</span>
+        <span class="article-date">Spring 2026 · Financial Markets, p. 52</span>
+      </div>
+      <h2>How Often is Too Often? Examining Earnings Reports in Modern Capital Markets</h2>
+      <p class="article-byline">by Sharanya Sivasathiyanathan, Junior Editor</p>
+
+      <div class="pdf-scan">
+        <embed src="qbr-spring2026.pdf#page=2" type="application/pdf" />
+        <div class="pdf-caption">
+          <span>Queen's Business Review · Spring 2026 · Volume 16 · In Print</span>
+          <a href="qbr-spring2026.pdf" target="_blank">Open PDF ↗</a>
+        </div>
+      </div>
+
+      <div class="article-body">
+        <p class="lede">In September of 2025, the Trump administration revived a familiar idea that surfaces periodically in corporate governance circles. The proposal calls for reducing the frequency of mandatory earnings reporting for U.S. public companies from quarterly to semi-annual.</p>
+        <p>The argument, as it has appeared for decades, runs that quarterly reporting forces executives to manage toward ninety-day horizons and therefore suppresses long-term investment in favour of earnings-per-share optics. Europe, so the logic goes, reports semi-annually and manages to take a longer view. Therefore, if American companies reported less often, their leaders might act more like stewards than speculators.</p>
+        <p>It is a coherent argument. It is also largely wrong, and the ways in which it is wrong matter more than whether any particular administration succeeds in implementing the policy. The case against quarterly reporting conflates two separate problems, attributes one to the wrong cause, and in proposing a remedy, makes the other materially worse. Short-termism in corporate decision-making is indeed real, but it is a governance problem instead of a reporting problem. Information asymmetry in public markets is also legitimate, and reducing disclosure frequency would widen it significantly. The costs would fall most heavily on those least equipped to bear them. In fact, the people most likely to champion less transparency are often those least likely to be harmed by it.</p>
+
+        <h3>The European Proof Point Does Not Prove What People Think It Proves</h3>
+        <p>European markets are often cited as evidence that semi-annual reporting is effective, but this example is far more rhetorical than it is analytical. The EU's Transparency Directive and the UK's former Disclosure and Transparency Rules did not actually eliminate sub-annual reporting; instead, they introduced Interim Management Statements (IMS) as a middle ground between quarterly and semi-annual disclosure. IMS reports were largely narrative and qualitative as they offered high managerial discretion at the expense of little standardization. This made them closer to press releases than U.S. 10-Q filings, which include standardized GAAP financials and detailed earnings data enabling direct firm-to-firm comparisons. When the EU later made IMS voluntary, most firms dropped it altogether and research examining capital expenditure and R&amp;D spending following the voluntarization of IMS found no statistically significant increase in either. In short, companies did not invest more when they reported less. They simply reported less.</p>
+        <p>Moreover, the comparison with Europe also overlooks a fundamental difference: the EU never had a U.S.-style quarterly reporting regime to scale back. In the United States, this debate concerns reducing disclosure from a well-established, auditor-reviewed system. In Europe, the discussion focused on whether relatively lighter interim disclosure requirements were sufficient within their existing regulatory environment. Treating Europe as a model for U.S. reform therefore misrepresents the baseline.</p>
+
+        <h3>Short-Termism Is a Governance Problem</h3>
+        <p>Still, those advocating for fewer reports are right about the pressures of short timelines. Executives face enormous expectations to deliver near-term earnings growth. Boards often reward quarterly performance in ways that can discourage investments with long payback periods. Most executive pay at large public companies remains tied to one-year performance metrics like EPS growth, ROE, and revenue targets. These create powerful disincentives for investments whose costs are front-loaded and whose returns accrue over multiple years.</p>
+        <p>For example, a CEO deciding whether to build a new manufacturing facility or fund a multi-year R&amp;D program with a fifteen-year payback faces a compensation structure that penalizes the short-term earnings dip such projects create. This hurts the metrics that determine bonuses and performance reviews, no matter how often the company reports to the SEC. This misalignment is only worsened by the fact that return on invested capital varies widely by sector but rarely aligns with an annual performance review cycle. Infrastructure and utilities projects can take ten to twenty years to reach full payback, while even in faster-moving sectors like technology or consumer goods, meaningful capital investments usually require several years to generate positive returns.</p>
+        <p>Furthermore, the high price-to-earnings ratios of growth stocks like NVIDIA demonstrate that investors can and do value long-term cash flow potential. If quarterly reporting truly forced market myopia, firms with volatile short-term earnings but optimistic long-term prospects would be systematically undervalued. Instead, investors regularly pay a premium for NVIDIA's future growth in AI and semiconductors. Addressing short-termism therefore requires reforming incentive systems: revising annual bonus structures and multi-year equity vesting schedules. However, this is far more difficult, less visible, and less convenient for the executives most vocal about fewer reporting requirements.</p>
+
+        <h3>Who Actually Benefits From Less Disclosure</h3>
+        <p>Large institutional investors maintain direct access to management through analyst days, non-deal roadshows, and continuous sell-side research. When a company goes from filing four times a year to two, a large asset manager with these resources only experiences a modest rise in uncertainty that they can mostly offset through existing channels.</p>
+        <p>Retail investors have none of these alternatives. They rely entirely on public filings for audited data on earnings trajectories, cash flow stability, changes to the balance sheet, and management's forward-looking goals. Cutting reports in half doubles the time they operate on stale information, and during those gaps, institutions continue trading on fresh private insights. This inevitably widens the persistent information gap between professional and retail participants, not due to analytical skill differences, but to unequal structural support.</p>
+        <p>Additionally, research coverage of mid-cap and small-cap companies is already sparse. The economic model for analyst research relies on regular disclosure events to spark client interest and trading volume. Fewer reports mean fewer catalysts around which research can be organized and monetized, thereby leading to wider bid-ask spreads, and lower transparency for investors. This is the opposite of what healthy public markets need.</p>
+
+        <h3>The Connection to Private Markets</h3>
+        <p>Reduced disclosure frequency would accelerate a major ongoing shift in the financial system that is already well underway: the migration of capital from public to private markets. The number of U.S.-listed public companies peaked in the late 1990s and has declined materially since, as firms stay private longer, IPO activity contracts relative to GDP, and private equity and credit assets under management has exploded in size. While multi-causal, this trend consistently features executives and founders viewing public listing as a burden-to-benefit tradeoff that favours avoiding the public route to limit disclosure burdens and litigation risk. Thus, some policymakers respond to the decline in public listings by loosening disclosure rules to make public markets resemble private ones.</p>
+
+        <h3>Who Gets Left Holding the Wrong Lever</h3>
+        <p>If the goal is to revive public markets and increase participation in wealth creation, the answer is not less transparency but stronger governance. Companies should align incentives with long-term performance by linking compensation to multi-year results, innovation progress, and sustainability goals that represent lasting enterprise value.</p>
+        <p>There is a greater opportunity hidden in this debate. In an era where trust in institutions and markets are increasingly fragile, trust has become a form of competitive capital. Firms that communicate candidly and consistently through transparent earnings discussions and accessible investor relations differentiate themselves not just to investors, but to employees, regulators, and customers alike. Transparency invites scrutiny but compounds trust over time much like any other asset. In seeking to escape short-term pressure by reporting less often, firms may instead forfeit one of the few mechanisms left that boosts long-term confidence in markets.</p>
+      </div>
+    </div>
+
+    <!-- ARTICLE 2 -->
+    <div class="article-block" id="algorithm">
+      <div class="article-meta-row">
+        <span class="article-pub">Queen's Business Review · Vol. 16</span>
+        <span class="article-date">Spring 2026 · Letter to the Editor, p. 94</span>
+      </div>
+      <h2>The Algorithm Is Sitting in the Front Row</h2>
+      <p class="article-byline">by Sharanya Sivasathiyanathan, Junior Editor</p>
+
+      <div class="pdf-scan">
+        <embed src="qbr-spring2026.pdf#page=4" type="application/pdf" />
+        <div class="pdf-caption">
+          <span>Queen's Business Review · Spring 2026 · Volume 16 · In Print</span>
+          <a href="qbr-spring2026.pdf" target="_blank">Open PDF ↗</a>
+        </div>
+      </div>
+
+      <div class="article-body">
+        <p class="lede">In 1993, a 100-level World Series ticket to cheer on the Blue Jays costed approximately $67 CAD (which is around $152 CAD today when adjusted for inflation). Now, that same seat, usually available only through resale, goes for over $11,000 before taxes and fees.</p>
+        <p>Gone are the days when a ticket to a major sporting or entertainment event was a tangible, attainable slice of shared culture. In 2025, attending a marquee event has become a high-stakes game of algorithmic cat and mouse, where fans compete against ruthless software in a market rigged by dynamic pricing and ticket bots. Contrary to popular belief, this steep inflation is not the result of supply and demand market forces, but instead the consequence of entrenched technology designed to maximize profits for "scalpers".</p>
+        <p>Dynamic pricing refers to the practice of adjusting ticket costs in real time based on supply, demand, competitor prices, and consumer behavior through algorithmic software. It is commonplace in sectors like airlines and retail. Ticketmaster, owned by Live Nation Entertainment, applies demand-based dynamic pricing. Their algorithms analyze historical sales and seat location (value perception) among other factors to set fluctuating prices and maximize revenue. While dynamic pricing could theoretically balance demand and supply efficiently, it often exacerbates ticket price inflation for high-demand events, therefore pricing out many fans and undermining the communal spirit that cultural events aim to foster.</p>
+        <p>Part of the challenge to address this lies in meeting supply and demand, because the desire to attend high-profile events will always exceed available seats. As such, this creates a fertile ground for unchecked scalpers (unauthorized resellers) to proliferate ticket bots using countless IP addresses and scripts that can snap up tickets faster than any human and empty ticket inventories in seconds. These scalper bots also create fake or hijack legitimate accounts to bypass purchase limits and block genuine fans from acquiring face-value tickets; they are then forced to enter the secondary market where scalpers resell at exorbitant prices. Ticketmaster profits from both the primary and secondary markets, creating a conflict of interest that has become a key point of contention amid consumers.</p>
+        <p>Although laws banning ticket bots are in place, like the Better Online Ticket Sales Act in the United States and Ontario's scalper bot ban, they are generally unenforceable pieces of legislation that create a gap in revenue that is accessible to neither artists nor venues. This not only damages the fabric of communal experiences that sports and cultural events provide, but also unfairly shifts public wrath onto venue staff and organizers who have little control over these practices. Frontline workers bear the brunt of frustrated fans' anger, tarnishing the reputation of venues and cultural institutions through no fault of their own.</p>
+        <p>Dynamic pricing is fully legal. In fact, its fully-transparent use has the potential to smooth attendance and improve visitor experiences without pricing out families or lower-income individuals (ex. how Disney manages crowd levels), but policy intervention is necessary where bots are involved. Capping resale profits as Ontario attempted with its 50% cap on resale prices is a great starting point, but in the long-term, banning scalper bots is critical. Research has found that successful monitoring of such a ban can be consistently implemented through virtual waiting rooms and verified fan access systems. Overall, cultural fixtures like live sports and entertainment carry public good value beyond profit maximization as exclusive commodities. They enrich society by promoting cultural diversity and community engagement! As such, algorithms should never compromise fairness to enter these spaces. So, preserving inclusive access to these quintessential Canadian experiences ensures the algorithm still serves the fans in the front row, and not just the highest bidder.</p>
+      </div>
+    </div>
+
+    <!-- MEDIUM -->
+    <div class="article-block">
+      <div class="article-meta-row">
+        <span class="article-pub">Medium</span>
+      </div>
+      <h2>On Medium</h2>
+      <div class="medium-cards">
+        <a class="medium-card" href="https://medium.com/@sharanyasivasathiyanathan1/uscspeakyourmind-what-a-viral-trend-says-about-the-state-of-student-mental-health-0f9528ac45a2" target="_blank">
+          <span class="medium-icon">🧠</span>
+          <div>
+            <h3>#USCSpeakYourMind: What a Viral Trend Says About the State of Student Mental Health</h3>
+            <p>An essay on what a viral student movement reveals about how higher education institutions respond to mental health crises and what accountability actually looks like.</p>
+            <span class="medium-link">Read on Medium ↗</span>
+          </div>
+        </a>
+        <a class="medium-card" href="https://medium.com/@sharanyasivasathiyanathan1/the-urgent-need-for-canada-to-step-up-and-support-our-firefighters-9133ba25e748" target="_blank">
+          <span class="medium-icon">🚒</span>
+          <div>
+            <h3>The Urgent Need for Canada to Step Up and Support Our Firefighters</h3>
+            <p>Drawing on experience in the City of Ottawa's firefighter training program, examining the systemic gaps in support for frontline emergency responders across Canada.</p>
+            <span class="medium-link">Read on Medium ↗</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>© 2026 Sharanya Sivasathiyanathan</p>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/sharanya-sivas/" target="_blank">LinkedIn</a>
+      <a href="https://medium.com/@sharanyasivasathiyanathan1" target="_blank">Medium</a>
+      <a href="mailto:sharanya.s@queensu.ca">Email</a>
+    </div>
+  </footer>
+
+</body>
+</html>
